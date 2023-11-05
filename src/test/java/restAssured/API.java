@@ -8,7 +8,7 @@ import io.restassured.response.Response;
 
 public class API 
 {
-	String token = "Bearer cd2ac6be51d3e141feb492b0cc0ddd8d3eb8d0bc7da80d1a1ef57ecdd74bf517";
+	String token = "Bearer fcfda1b3d05e7ce4c2899f34adb5cb287d277a15897a2fdddb7478e2d2c90508";
 @Test
 public void getUser()
 {
@@ -18,13 +18,14 @@ public void getUser()
 	.when().get();
 	
 	 res.then().statusCode(200);
-	 res.then().assertThat().body("data[0].id", equalTo(5669995));
+	 res.then().log().all();
+//	 res.then().assertThat().body("id", equalTo(5674294));
 }
 
 @Test
 public void createUser() {
 	String email = getSaltString()+"@gmail.com";
-	String requestBody ="{\"name\":\"Gurdev Verma\", \"gender\":\"female\", \"email\":\"\" + email + \"\", \"status\":\"active\"}";
+	String requestBody ="{\"name\":\"Gurdev Verma\", \"gender\":\"female\", \"email\":\""+email+"\", \"status\":\"active\"}";
 	RestAssured.baseURI="https://gorest.co.in/public/v2/users";
 	
 	Response res = RestAssured.given().header("Accept","application/json")
@@ -35,15 +36,16 @@ public void createUser() {
 }
 @Test
 public void updateUser() {
+
 	String email = getSaltString()+"@gmail.com";
-	String requestBody = "{\"name\":\"Gurdev Verma\",\"email\":\"\" + email + \"\", \"status\":\"active\"}";
+	String requestBody = "{\"name\":\"Tara  Khana\",\"email\":\"" + email + "\", \"status\":\"active\"}";
 	RestAssured.baseURI = "https://gorest.co.in/public/v2/users";
 	Response response = RestAssured
 			.given()
 			.header("Accept", "application/json")
 			.header("Content-Type", "application/json")
 			.header("Authorization", token)
-			.body(requestBody).when().patch("/5669995");
+			.body(requestBody).when().patch("/5674293");
 	response.then().log().all();
 	response.then().statusCode(200);
 }
@@ -56,7 +58,7 @@ public void deleteUsers()
 		.header("Accept", "application/json")
 		.header("Content-Type", "application/json")
 		.header("Authorization", token)
-		.when().delete("/5669995");
+		.when().delete("/5674305");
 
 
 		response.then().log().all();

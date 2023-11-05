@@ -3,14 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="restAssured.API">
+      <class name="restAssured.APITests">
         <methods>
-          <include name="createUser"/>
-          <include name="updateUser"/>
-          <include name="getUser"/>
-          <include name="deleteUsers"/>
+          <include name="createUserExternalJSON"/>
         </methods>
-      </class> <!-- restAssured.API -->
+      </class> <!-- restAssured.APITests -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

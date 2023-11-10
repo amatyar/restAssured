@@ -1,6 +1,5 @@
 package restAssured;
 
-import static org.hamcrest.Matchers.equalTo;
 import java.util.Random;
 import org.testng.annotations.Test;
 import io.restassured.RestAssured;

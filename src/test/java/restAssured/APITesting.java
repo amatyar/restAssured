@@ -8,7 +8,7 @@ import io.restassured.response.Response;
 
 public class APITesting {
 	private String accessToken="fcfda1b3d05e7ce4c2899f34adb5cb287d277a15897a2fdddb7478e2d2c90508";
-	
+	int id =0;
 	Utilities_API apiUtility = new Utilities_API(accessToken);
 	String token = "Bearer fcfda1b3d05e7ce4c2899f34adb5cb287d277a15897a2fdddb7478e2d2c90508";
 	protected String getSaltString() 
@@ -25,7 +25,7 @@ public class APITesting {
         return saltStr;
 	}
 
-	@Test
+	@Test(priority =1)
 	
 	public void getRequestTest()
 	{
@@ -34,7 +34,7 @@ public class APITesting {
 		getResponse.then().log().all();
 	}
 	
-	@Test
+	@Test(priority =2)
 	public void postRequestTest()
 	{
 		String email =getSaltString()+"@gmail.com";
@@ -42,20 +42,21 @@ public class APITesting {
 		Response postResponse = apiUtility.PostRequest("/users", payload);
 		postResponse.then().statusCode(201);
 		postResponse.then().log().all();
+		id = postResponse.jsonPath().getInt("id");
 	}
-	@Test
+	@Test(priority =3)
 	public void putRequestTest()
 	{
 		String email =getSaltString()+"@gmail.com";
-		String payload = "{\"name\":\"Tenali Sharma\", \"gender\":\"male\", \"email\":\""+email+"\", \"status\":\"active\"}";	
-		Response putResponse = apiUtility.PutRequest("/users/5705752", payload);
+		String payload = "{\"name\":\"Rabindra Amatya\", \"gender\":\"male\", \"email\":\""+email+"\", \"status\":\"active\"}";	
+		Response putResponse = apiUtility.PutRequest("/users/" +id, payload);
 		putResponse.then().statusCode(200);
 		putResponse.then().log().all();
 	}
-	@Test
+	@Test(priority =4)
 	public void deleteRequestTest()
 	{
-		Response deleteResponse = apiUtility.DeleteRequest("/users/5705752");
+		Response deleteResponse = apiUtility.DeleteRequest("/users/" + id);
 		deleteResponse.then().statusCode(204);
 	}
 }

@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="restAssured.APIReqres">
+      <class name="restAssured.APITesting">
         <methods>
-          <include name="testQueryandPathparameters"/>
+          <include name="deleteRequestTest"/>
         </methods>
-      </class> <!-- restAssured.APIReqres -->
+      </class> <!-- restAssured.APITesting -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

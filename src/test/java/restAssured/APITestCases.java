@@ -70,4 +70,23 @@ public class APITestCases
 		}
 		Assert.assertTrue(found);
 	}
+	@Test
+	public void testCase4()
+	{
+		RestAssured.baseURI ="https://reqres.in/api";
+		boolean found =false;
+		Response rest=given().when().get("users?page=2");
+		JSONObject obj = new JSONObject(rest.asString());
+		for(int i=0; i<obj.getJSONArray("data").length();i++) 
+		{
+			String FirstName= obj.getJSONArray("data").getJSONObject(i).getString("first_name").toString();
+			System.out.println(FirstName);
+			if(FirstName.equals("Tobias")) 
+			{
+				found=true;
+				break;
+			}
+		}
+		Assert.assertTrue(found);
+	}
 }
